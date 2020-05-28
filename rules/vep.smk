@@ -19,4 +19,4 @@ rule vep:
     message:
         "Using the VEP database to determine the effect of the variants"
     shell:
-        "vep -i {input.vcf} --fasta {input.refgenome} --dir {input.vep} -o {output.vcf} --assembly {params.build} {params.other} --fork {threads}"
+        "( vep -i {input.vcf} --fasta {input.refgenome} --dir {input.vep} -o {output.vcf} --assembly {params.build} {params.other} --fork {threads} 2> vep.stderr ) 2> times/vep_time.txt"

@@ -21,6 +21,6 @@ rule gatk4_CNNScoreVariants:
         "Annotating vcf with scores from a Convolutional Neural Network (CNN) (2D model with pre-trained architecture)"
     shell:
         """
-        gatk --java-options "-Xmx64g -Xms64g" CNNScoreVariants \
-            -V {input.vcf} -I {input.bams} -R {input.refgenome} -O {output} --inter-op-threads {threads} --intra-op-threads {threads} --tmp-dir {params.tdir} {params.padding} {params.intervals} {params.other}
+        (time gatk --java-options "-Xmx64g -Xms64g" CNNScoreVariants \
+            -V {input.vcf} -I {input.bams} -R {input.refgenome} -O {output} --inter-op-threads {threads} --intra-op-threads {threads} --tmp-dir {params.tdir} {params.padding} {params.intervals} {params.other} 2> gatk4_CNNScoreVariants.stderr ) 2> times/gatk4_CNNScoreVariants_time.txt
         """
