@@ -22,5 +22,5 @@ rule gatk4_CNNScoreVariants:
     shell:
         """
         ( /usr/bin/time gatk --java-options "-Xmx64g -Xms64g" CNNScoreVariants \
-            -V {input.vcf} -I {input.bams} -R {input.refgenome} -O {output} --inter-op-threads {threads} --intra-op-threads {threads} --tmp-dir {params.tdir} {params.padding} {params.intervals} {params.other} ) 2> times/gatk_cnn_score_variants.stderr"
+            -V {input.vcf} -I {input.bams} -R {input.refgenome} -O {output} --inter-op-threads {threads} --intra-op-threads {threads} --tmp-dir {params.tdir} {params.padding} {params.intervals} {params.other} ) 2> times/gatk_cnn_score_variants.stderr
         """
