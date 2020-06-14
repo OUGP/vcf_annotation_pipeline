@@ -15,8 +15,8 @@ rule vep:
         "benchmarks/vep/{sample}.vep"
     conda:
         "../envs/vep.yaml"
-    threads: 4
+    threads: 32
     message:
         "Using the VEP database to determine the effect of the variants"
     shell:
-        "( vep -i {input.vcf} --fasta {input.refgenome} --dir {input.vep} -o {output.vcf} --assembly {params.build} {params.other} --fork {threads} 2> vep.stderr ) 2> times/vep_time.txt"
+        "( /usr/bin/time -i {input.vcf} --fasta {input.refgenome} --dir {input.vep} -o {output.vcf} --assembly {params.build} {params.other} --fork {threads} ) 2> times/vep.stderr"

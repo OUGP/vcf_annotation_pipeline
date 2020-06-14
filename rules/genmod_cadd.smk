@@ -15,4 +15,4 @@ rule genmod_CADD:
     message:
         "Using the CADD database to annotate the variants with deleteriousness scores"
     shell:
-        "(time genmod annotate {input.vcf} -c {input.cadd} -o {output.vcf} {params} 2> genmod_CADD.stderr ) 2> times/genmod_CADD_time.txt"
+        "( /usr/bin/time genmod annotate {input.vcf} -c {input.cadd} -o {output.vcf} {params} ) 2> times/genmod_cadd.stderr"

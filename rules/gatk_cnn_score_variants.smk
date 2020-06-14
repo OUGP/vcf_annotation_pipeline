@@ -16,11 +16,11 @@ rule gatk4_CNNScoreVariants:
         "benchmarks/gatk_score_variants/{sample}.gatkscorevariants"
     singularity:
         "docker://broadinstitute/gatk:4.1.7.0"
-    threads: 12
+    threads: 32
     message:
         "Annotating vcf with scores from a Convolutional Neural Network (CNN) (2D model with pre-trained architecture)"
     shell:
         """
-        (time gatk --java-options "-Xmx64g -Xms64g" CNNScoreVariants \
-            -V {input.vcf} -I {input.bams} -R {input.refgenome} -O {output} --inter-op-threads {threads} --intra-op-threads {threads} --tmp-dir {params.tdir} {params.padding} {params.intervals} {params.other} 2> gatk4_CNNScoreVariants.stderr ) 2> times/gatk4_CNNScoreVariants_time.txt
+        ( /usr/bin/time gatk --java-options "-Xmx64g -Xms64g" CNNScoreVariants \
+            -V {input.vcf} -I {input.bams} -R {input.refgenome} -O {output} --inter-op-threads {threads} --intra-op-threads {threads} --tmp-dir {params.tdir} {params.padding} {params.intervals} {params.other} ) 2> times/gatk_cnn_score_variants.stderr"
         """

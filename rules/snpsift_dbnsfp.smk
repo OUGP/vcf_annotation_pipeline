@@ -12,8 +12,8 @@ rule SnpSift_dbNSFP:
         "benchmarks/snpsift_dbnsfp/{sample}.snpsiftdbnsfp"
     conda:
         "../envs/dbnsfp.yaml"
-    threads: 4
+    threads: 32
     message:
         "Using the dbNSFP database to annotate variants with functional predictions from multiple algorithms (SIFT, Polyphen2, LRT and MutationTaster, PhyloP and GERP++, etc.)"
     shell:
-        "( time SnpSift -Xmx16g dbnsfp {input.vcf} > {output.vcf} -db {input.dbnsfp} {params} -t {threads} 2> SnpSift_dbNSFP.stderr ) 2> times/SnpSift_dbNSFP_time.txt"
+        "( /usr/bin/time SnpSift -Xmx16g dbnsfp {input.vcf} > {output.vcf} -db {input.dbnsfp} {params} -t {threads} ) 2> times/snpsift_dbnsfp.stderr"

@@ -1,4 +1,3 @@
-# Add more resources
 rule gatk4_FilterVariantTranches:
     input:
         vcf = "filtered/{sample}_scored.vcf" 
@@ -19,4 +18,4 @@ rule gatk4_FilterVariantTranches:
     message:
         "Applying tranche filtering to variant calls"
     shell:
-        "(time gatk FilterVariantTranches -V {input.vcf} -O {output} --tmp-dir {params.tdir} {params.padding} {params.intervals} {params.resources} {params.other} 2> gatk4_FilterVariantTranches.stderr ) 2> times/gatk4_FilterVariantTranches_time.txt"
+        "( /usr/bin/time gatk FilterVariantTranches -V {input.vcf} -O {output} --tmp-dir {params.tdir} {params.padding} {params.intervals} {params.resources} {params.other} ) 2> times/gatk_filter_variant_tranches.stderr"
